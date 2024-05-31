@@ -211,7 +211,7 @@ elif model_type in ['YOLOv9', 'YOLOv10']:
                     
                     return img, df_fq
                 
-                img, df_fq = predict_and_detect(model, img, classes=[], conf=0.5)
+                img, df_fq = predict_and_detect(model, img, classes=[], conf=confidence)
                 FRAME_WINDOW.image(img, channels='BGR')
                 
                 # Updating Inference results
