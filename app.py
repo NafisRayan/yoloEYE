@@ -177,15 +177,15 @@ elif model_type in ['YOLOv9', 'YOLOv10']:
             # st.caption(model(img)[0][0])
 
             if pred:
-                def predict(model, imag, classes=[], conf=0.5):
+                def predict(model, imag, classes=[], conf=confidence):
                     if classes:
-                        results = model.predict(imag, classes=classes, conf=conf)
+                        results = model.predict(imag, classes=classes, conf=confidence)
                     else:
-                        results = model.predict(imag, conf=conf)
+                        results = model.predict(imag, conf)
 
                     return results
 
-                def predict_and_detect(model, img, classes=[], conf=0.5, rectangle_thickness=draw_thick, text_scale=draw_thick, text_thickness=draw_thick):
+                def predict_and_detect(model, img, classes=[], conf=confidence, rectangle_thickness=draw_thick, text_scale=draw_thick, text_thickness=draw_thick):
                     results = predict(model, img, classes, conf=conf)
                     
                     # Initialize a Counter to keep track of class occurrences
