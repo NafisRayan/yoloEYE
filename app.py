@@ -181,7 +181,7 @@ elif model_type in ['YOLOv9', 'YOLOv10']:
                     if classes:
                         results = model.predict(imag, classes=classes, conf=confidence)
                     else:
-                        results = model.predict(imag, conf)
+                        results = model.predict(imag, conf=conf)
 
                     return results
 
