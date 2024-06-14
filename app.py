@@ -15,7 +15,7 @@ p_time = 0
 
 st.sidebar.title('Settings')
 model_type = st.sidebar.selectbox(
-    'Choose YOLO Model', ('YOLOv8', 'YOLOv7', 'YOLOv9', 'YOLOv10')
+    'Choose YOLO Model', ('YOLOv8', 'YOLOv9', 'YOLOv10')
 )
 
 st.title(f'{model_type} Predictions')
@@ -33,26 +33,6 @@ def speak(audio):
     engine.runAndWait()
 
 if st.sidebar.checkbox('Load Model Options'):
-    
-    # YOLOv7 Model
-    if model_type == 'YOLOv7':
-        path_model_file = 'yolov7.pt'
-        # GPU
-        gpu_option = st.sidebar.radio(
-            'PU Options:', ('CPU', 'GPU'))
-
-        if not torch.cuda.is_available():
-            st.sidebar.warning('CUDA Not Available, So choose CPU', icon="⚠️")
-        else:
-            st.sidebar.success(
-                'GPU is Available on this Device, Choose GPU for the best performance',
-                icon="✅"
-            )
-        # Model
-        if gpu_option == 'CPU':
-            model = custom(path_or_model=path_model_file)
-        if gpu_option == 'GPU':
-            model = custom(path_or_model=path_model_file, gpu=True)
 
     # YOLOv8 Model
     if model_type == 'YOLOv8':
@@ -89,85 +69,7 @@ if st.sidebar.checkbox('Load Model Options'):
     
     color_pick_list = [None]*len(class_labels)
 
-
-if model_type in ['YOLOv8', 'YOLOv7']:
-        # Image
-        if options == 'Image':
-            upload_img_file = st.sidebar.file_uploader(
-                'Upload Image', type=['jpg', 'jpeg', 'png'])
-            if upload_img_file is not None:
-                pred = st.checkbox(f'Predict Using {model_type}')
-                print('pred: ',pred)
-                file_bytes = np.asarray(
-                    bytearray(upload_img_file.read()), dtype=np.uint8)
-                img = cv2.imdecode(file_bytes, 1)
-                FRAME_WINDOW.image(img, channels='BGR')
-
-                if pred:
-                    img, current_no_class = get_yolo(img, model_type, model, confidence, color_pick_list, class_labels, draw_thick)
-                    FRAME_WINDOW.image(img, channels='BGR')
-
-                    # Current number of classes
-                    class_fq = dict(Counter(i for sub in current_no_class for i in set(sub)))
-                    class_fq = json.dumps(class_fq, indent = 4)
-                    class_fq = json.loads(class_fq)
-                    df_fq = pd.DataFrame(class_fq.items(), columns=['Class', 'Number'])
-                    
-                    # Updating Inference results
-                    with st.container():
-                        st.markdown("<h2>Inference Statistics</h2>", unsafe_allow_html=True)
-                        st.markdown("<h3>Detected objects in curret Frame</h3>", unsafe_allow_html=True)
-                        st.dataframe(df_fq)
-                        # print("🚀 ~ df_fq:", df_fq)
-
-                        list_of_tuples = [(row.Number, row.Class) for row in df_fq.itertuples()]
-                        print("🚀 ~ list_of_tuples:", list_of_tuples)
-
-                        speak(f'This is what I have found {list_of_tuples}')
-
-
-                    #############################################################################################
-
-    
-        
-        # Video
-        if options == 'Video':
-            upload_video_file = st.sidebar.file_uploader(
-                'Upload Video', type=['mp4', 'avi', 'mkv'])
-            if upload_video_file is not None:
-                pred = st.checkbox(f'Predict Using {model_type}')
-
-                tfile = tempfile.NamedTemporaryFile(delete=False)
-                tfile.write(upload_video_file.read())
-                cap = cv2.VideoCapture(tfile.name)
-                # if pred:
-
-
-        # Web-cam
-        if options == 'Webcam':
-            cam_options = st.sidebar.selectbox('Select Webcam Channel',
-                                            ('0', '1', '2', '3'))
-        
-            if not cam_options == 'Select Channel':
-                pred = st.checkbox(f'Predict Using {model_type}')
-                cap = cv2.VideoCapture(int(cam_options))
-
-
-        # RTSP
-        if options == 'RTSP':
-            rtsp_url = st.sidebar.text_input(
-                'RTSP URL:',
-                'eg: rtsp://admin:name6666@198.162.1.58/cam/realmonitor?channel=0&subtype=0'
-            )
-            pred = st.checkbox(f'Predict Using {model_type}')
-            cap = cv2.VideoCapture(rtsp_url)
-
-        # for i in range(len(class_labels)):
-        #     classname = class_labels[i]
-        #     color = color_picker_fn(classname, i)
-        #     color_pick_list.append(color)
-
-elif model_type in ['YOLOv8']:
+if model_type in ['YOLOv8']:
         # Image
         if options == 'Image':
             upload_img_file = st.sidebar.file_uploader(
