@@ -3,4 +3,5 @@ opencv-python-headless
 numpy
 pandas
 pyttsx3
+comtypes
 ultralytics
