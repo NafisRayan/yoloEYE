@@ -2,7 +2,7 @@
 
 ## Description
 
-This project utilizes YOLO (You Only Look Once) models for object detection tasks. It provides a user-friendly interface built with Streamlit, allowing users to easily upload images or video streams to see object detections in real-time. The application supports various YOLO models, including YOLOv7, YOLOv8, and YOLOv9, offering flexibility and accuracy in detecting objects across different scenarios.
+This project utilizes YOLO (You Only Look Once) models for object detection tasks. It provides a user-friendly interface built with Streamlit, allowing users to easily upload images or video streams to see object detections in real-time. The application supports various YOLO models, including YOLOv8, and YOLOv9, YOLOv10; offering flexibility and accuracy in detecting objects across different scenarios.
 
 ## Getting Started
 
