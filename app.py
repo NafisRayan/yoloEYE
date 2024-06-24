@@ -38,7 +38,7 @@ options = st.sidebar.radio(
 
 # YOLOv8 Model
 if model_type == 'YOLOv8':
-    path_model_file = 'yolov8.pt'
+    path_model_file = 'yolov8m.pt'
     from ultralytics import YOLO
     model = YOLO(path_model_file)
 
