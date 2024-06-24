@@ -32,42 +32,40 @@ def speak(audio):
     engine.say(audio)
     engine.runAndWait()
 
-if st.sidebar.checkbox('Load Model Options'):
+# Inference Mode
+options = st.sidebar.radio(
+    'Options:', ('Webcam', 'Image', 'Video'), index=1) # removed RTSP for now
 
-    # YOLOv8 Model
-    if model_type == 'YOLOv8':
-        path_model_file = 'yolov8.pt'
-        from ultralytics import YOLO
-        model = YOLO(path_model_file)
-    
-    if model_type == 'YOLOv9':
-        path_model_file = 'yolov9c.pt'
-        from ultralytics import YOLO
-        model = YOLO(path_model_file)
-    if model_type == 'YOLOv10':
-        st.caption("Work in Progress... >_<")
-        # path_model_file = 'yolov10n.pt'
-        # from ultralytics import YOLO
-        # model = YOLO(path_model_file)
+# YOLOv8 Model
+if model_type == 'YOLOv8':
+    path_model_file = 'yolov8.pt'
+    from ultralytics import YOLO
+    model = YOLO(path_model_file)
 
-    # Load Class names
-    class_labels = model.names
+if model_type == 'YOLOv9':
+    path_model_file = 'yolov9c.pt'
+    from ultralytics import YOLO
+    model = YOLO(path_model_file)
+if model_type == 'YOLOv10':
+    st.caption("Work in Progress... >_<")
+    # path_model_file = 'yolov10n.pt'
+    # from ultralytics import YOLO
+    # model = YOLO(path_model_file)
 
-    # Inference Mode
-    options = st.sidebar.radio(
-        'Options:', ('Webcam', 'Image', 'Video'), index=1) # removed RTSP for now
+# Load Class names
+class_labels = model.names
 
-    # Confidence
-    confidence = st.sidebar.slider(
-        'Detection Confidence', min_value=0.0, max_value=1.0, value=0.25)
+# Confidence
+confidence = st.sidebar.slider(
+    'Detection Confidence', min_value=0.0, max_value=1.0, value=0.25)
 
-    # Draw thickness
-    draw_thick = st.sidebar.slider(
-        'Draw Thickness:', min_value=1,
-        max_value=20, value=3
-    )
-    
-    color_pick_list = [None]*len(class_labels)
+# Draw thickness
+draw_thick = st.sidebar.slider(
+    'Draw Thickness:', min_value=1,
+    max_value=20, value=3
+)
+
+color_pick_list = [None]*len(class_labels)
 
 
 # Image
