@@ -46,6 +46,12 @@ if model_type == 'YOLOv9':
     path_model_file = 'yolov9c.pt'
     from ultralytics import YOLO
     model = YOLO(path_model_file)
+
+if model_type == 'Gelan-C':
+    path_model_file = 'gelanc.pt'
+    from ultralytics import YOLO
+    model = YOLO(path_model_file)
+
 if model_type == 'YOLOv10':
     st.caption("Work in Progress... >_<")
     # path_model_file = 'yolov10n.pt'
