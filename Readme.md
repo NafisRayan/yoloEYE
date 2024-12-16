@@ -8,7 +8,7 @@ This project utilizes YOLO (You Only Look Once) models for object detection task
 
 Here are some screenshots of the app showcasing its key features and design:  
 
-<img src="yoloEYE.png" alt="GoFlix Home Screen" width="250" />  
+<img src="yoloEYE.png" alt="GoFlix Home Screen" width="1000" />  
 
 ## Getting Started
 
