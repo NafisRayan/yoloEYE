@@ -4,6 +4,12 @@
 
 This project utilizes YOLO (You Only Look Once) models for object detection tasks. It provides a user-friendly interface built with Streamlit, allowing users to easily upload images or video streams to see object detections in real-time. The application supports various YOLO models, including YOLOv8, YOLOv9, and YOLOv10; offering flexibility and accuracy in detecting objects across different scenarios.
 
+## Screenshots  
+
+Here are some screenshots of the app showcasing its key features and design:  
+
+<img src="yoloEYE.png" alt="GoFlix Home Screen" width="250" />  
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
